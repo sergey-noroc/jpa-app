@@ -22,7 +22,7 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "post")
+    @Column(name = "title")
     private String title;
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)

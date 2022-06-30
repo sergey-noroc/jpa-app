@@ -10,7 +10,8 @@ public class GraphService {
 
         //EAGER for images and tags
         entityManager
-                .createQuery("select p from Post p")
+                .createQuery("select p from Post p where p.title = :title order by p.title desc")
+                .setParameter("title", "Hello")
                 .setHint("javax.persistence.fetchgraph", entityManager.getEntityGraph("post-entity-graph"))
                 .getResultList();
     }

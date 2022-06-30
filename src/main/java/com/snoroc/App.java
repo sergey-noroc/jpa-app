@@ -16,5 +16,6 @@ public class App {
         GraphService.runGraph(entityManager);
 
         entityTransaction.commit();
+
     }
 }

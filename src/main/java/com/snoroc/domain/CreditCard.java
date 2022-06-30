@@ -5,6 +5,14 @@ import jakarta.persistence.*;
 
 import java.util.List;
 
+@NamedStoredProcedureQuery(
+        name = "calculate",
+        procedureName = "GET_TOTAL_BALANCE_BY_CARD_TYPE",
+        parameters = {
+                @StoredProcedureParameter(mode = ParameterMode.IN, type = String.class, name = "type"),
+                @StoredProcedureParameter(mode = ParameterMode.OUT, type = Integer.class, name = "sum")
+        }
+)
 @Entity
 @Table(name = "credit_card")
 public class CreditCard {

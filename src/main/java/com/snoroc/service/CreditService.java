@@ -2,6 +2,7 @@ package com.snoroc.service;
 
 import com.snoroc.domain.CreditTransaction;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.StoredProcedureQuery;
 
 import java.util.List;
 
@@ -20,5 +21,13 @@ public class CreditService {
     public static void testFetch(EntityManager entityManager) {
         entityManager
                 .createQuery("select ct from CreditTransaction ct join fetch ct.creditCard", CreditTransaction.class).getResultList();
+    }
+
+    public static void testProcedure(EntityManager entityManager) {
+        StoredProcedureQuery query = entityManager.createNamedStoredProcedureQuery("calculate");
+        query.setParameter("type", "MASTER");
+        query.execute();
+        int sum = (int) query.getOutputParameterValue("sum");
+        System.out.println(sum);
     }
 }

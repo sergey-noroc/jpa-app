@@ -14,7 +14,8 @@ public class AppMySQL {
         entityTransaction.begin();
 
         //GraphService.runGraph(entityManager);
-        CreditService.testFetch(entityManager);
+        //CreditService.testFetch(entityManager);
+        CreditService.testProcedure(entityManager);
 
         entityTransaction.commit();
 

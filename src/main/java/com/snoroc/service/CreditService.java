@@ -1,8 +1,14 @@
 package com.snoroc.service;
 
+import com.snoroc.domain.CreditCard;
 import com.snoroc.domain.CreditTransaction;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.StoredProcedureQuery;
+import jakarta.persistence.Tuple;
+import jakarta.persistence.TypedQuery;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Root;
 
 import java.util.List;
 
@@ -29,5 +35,25 @@ public class CreditService {
         query.execute();
         int sum = (int) query.getOutputParameterValue("sum");
         System.out.println(sum);
+    }
+
+    public static void estUpdate(EntityManager entityManager) {
+        CreditCard creditCard = entityManager.find(CreditCard.class, 1L);
+        creditCard.setBalance(5000);
+
+        System.out.println(creditCard);
+    }
+
+    public static void testMultipleFields(EntityManager entityManager) {
+        List<Tuple> query = entityManager.createQuery("select cc.owner from CreditCard cc", Tuple.class).getResultList();
+        query.stream().forEach(tuple -> System.out.println(tuple));
+    }
+
+    public static void testCriteria(EntityManager entityManager) {
+        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+        CriteriaQuery<CreditCard> query = cb.createQuery(CreditCard.class);
+        Root<CreditCard> root = query.from(CreditCard.class);
+        TypedQuery<CreditCard> typedQuery = entityManager.createQuery(query);
+        typedQuery.getResultList();
     }
 }

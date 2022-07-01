@@ -15,7 +15,10 @@ public class AppMySQL {
 
         //GraphService.runGraph(entityManager);
         //CreditService.testFetch(entityManager);
-        CreditService.testProcedure(entityManager);
+        //CreditService.testProcedure(entityManager);
+        //CreditService.estUpdate(entityManager);
+        //CreditService.testMultipleFields(entityManager);
+        CreditService.testCriteria(entityManager);
 
         entityTransaction.commit();
 

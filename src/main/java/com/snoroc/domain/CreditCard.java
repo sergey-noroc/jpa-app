@@ -41,7 +41,7 @@ public class CreditCard {
     @Column(name = "is_active")
     private boolean isActive;
 
-    @OneToMany(mappedBy = "creditCard", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "creditCard", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<CreditTransaction> creditTransactions;
 
     public Long getId() {
@@ -106,5 +106,12 @@ public class CreditCard {
 
     public void setCreditTransactions(List<CreditTransaction> creditTransactions) {
         this.creditTransactions = creditTransactions;
+    }
+
+    @Override
+    public String toString() {
+        return "CreditCard{" +
+                "owner='" + owner + '\'' +
+                '}';
     }
 }
